@@ -156,10 +156,11 @@ class Investment:
         args:
           account(Account): A conta onde será realizada a venda
         """
-        if account.balance < self.calculate_value():
+        investment_value = self.calculate_value()
+        if account.balance < investment_value:
             raise ValueError("Saldo insuficiente para a compra")
-        account.balance -= self.calculate_value()
-        self.account.balance += self.calculate_value()
+        account.balance -= investment_value
+        self.account.balance += investment_value
         
 
 class Client:

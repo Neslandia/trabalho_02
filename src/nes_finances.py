@@ -210,10 +210,6 @@ class Client:
         returns:
           new_worth(float): A net worth do Client.
         """
-        net_worth = 0
-        for i in self.accounts:
-            net_worth += i.balance
-        for i in self.investments:
-            net_worth += i.calculate_value()
+        net_worth = sum(account.balance for account in self.accounts) + sum(investment.calculate_value() for investment in self.investments)
         return net_worth
     

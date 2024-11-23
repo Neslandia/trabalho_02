@@ -20,6 +20,8 @@ class Transaction:
           description(str): A descrição da transação.
         """
         self.date = datetime.now()
+        if amount < 0:
+            raise ValueError("Amount não pode ser negativo")
         self.amount = amount
         # Se a categoria for inválida, mostra um erro
         if category not in CATEGORIES.keys():
@@ -52,6 +54,8 @@ class Transaction:
         """
         # Checa se pode atualizar o atributo, e se puder, o atualiza
         if amount is not None:
+            if amount < 0:
+              raise ValueError("Amount não pode ser negativo")
             self.amount = amount
         if category is not None:
             if category not in CATEGORIES.keys():
@@ -75,6 +79,8 @@ class Account:
           transactions(list[Transaction]): Transações já feitas pela conta
         """
         self.name = name
+        if balance < 0:
+            raise ValueError("Amount não pode ser negativo")
         self.balance = balance
         self.transactions = transactions
     
@@ -87,6 +93,7 @@ class Account:
           category(int): A categoria da transação.
           description(str): A descrição da transação.
         """
+        # Instancia a transação e a armazena em self.transactions
         self.transactions.append(Transaction(amount, category, description))
     
     def get_transactions(self, 
@@ -109,7 +116,7 @@ class Account:
         if start_date is not None:
             lista_nova = [x for x in lista_nova if x.date > start_date]
         if end_date is not None:
-            lista_nova = [x for x in lista_nova if x.date < start_date]
+            lista_nova = [x for x in lista_nova if x.date < end_date]
         if category is not None:
             lista_nova = [x for x in lista_nova if x.category == category]
         
@@ -118,7 +125,7 @@ class Account:
 
 class Investment:
 
-    def __init__(self, type: int, amount: float, rate_of_return: float, account: Account) -> None:
+    def __init__(self, type: int, amount: float, rate_of_return: float, owner_account: Account) -> None:
         """
         Instancia um objeto da classe Investment
 
@@ -128,10 +135,12 @@ class Investment:
           rate_of_return(float): Rate de retorno
         """
         self.type = type
+        if amount < 0:
+            raise ValueError("Amount não pode ser negativo")
         self.amount = amount
         self.rate_of_return = rate_of_return
         self.date = datetime.now()
-        self.account = account
+        self.account = owner_account
 
     def calculate_value(self) -> float:
         """
@@ -140,7 +149,9 @@ class Investment:
         returns:
           valor(float): Valor estimado.
         """
-        return self.amount + self.rate_of_return * (datetime.now() - self.date).month
+        now = datetime.now()
+        months_elapsed = (now.year - self.date.year) * 12 + (now.month - self.date.month)
+        return self.amount + self.rate_of_return * months_elapsed
     
     def sell(self, account: Account) -> None:
         """
@@ -149,9 +160,10 @@ class Investment:
         args:
           account(Account): A conta onde será realizada a venda
         """
-        if account.balance > self.calculate_value():
-            account.balance -= self.calculate_value()
-            self.account.balance += self.calculate_value()
+        if account.balance < self.calculate_value():
+            raise ValueError("Saldo insuficiente para a compra")
+        account.balance -= self.calculate_value()
+        self.account.balance += self.calculate_value()
         
 
 class Client:

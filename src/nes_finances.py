@@ -111,16 +111,12 @@ class Account:
         returns:
           lista_nova(list[Transaction]): O atributo transactions depois das filtragens. 
         """
-        lista_nova = self.transactions
-        # Checa se os filtros são ou não aplicados
-        if start_date is not None:
-            lista_nova = [x for x in lista_nova if x.date > start_date]
-        if end_date is not None:
-            lista_nova = [x for x in lista_nova if x.date < end_date]
-        if category is not None:
-            lista_nova = [x for x in lista_nova if x.category == category]
-        
-        return lista_nova
+        return [
+          transaction for transaction in self.transactions
+          if (start_date is None or transaction.date > start_date)
+          and (end_date is None or transaction.date < end_date)
+          and (category is None or transaction.category == category)
+        ]
 
 
 class Investment:

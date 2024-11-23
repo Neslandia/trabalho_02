@@ -166,7 +166,42 @@ class Client:
           name(str): Nome do cliente.
         """
         self.accounts = accounts
-        self.investments: list[Investment]
+        self.investments = investments
         self.name = name
 
+    def add_account(self, acc_name: str) -> Account:
+        """
+        Instancia um objeto da classe Account que é desse Client
+
+        args:
+          acc_name(str): O nome da conta.
+        returns:
+          new_acc(Account): A conta criada.
+        """
+        new_acc = Account(acc_name, 0, [])
+        self.accounts.append(new_acc)
+        return new_acc
+    
+    def add_investment(self, investment: Investment) -> None:
+        """
+        Associa um investimento à um cliente
+
+        args:
+          investment(Investment): O investimento que será associado.
+        """
+        self.investments.append(investment)
+    
+    def get_net_worth(self) -> float:
+        """
+        Retorna o valor estimado em dinheiro de um cliente de acordo com seus investimentos/contas.
+
+        returns:
+          new_worth(float): A net worth do Client.
+        """
+        net_worth = 0
+        for i in self.accounts:
+            net_worth += i.balance
+        for i in self.investments:
+            net_worth += i.calculate_value()
+        return net_worth
     

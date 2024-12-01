@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from datetime import datetime
+from datetime import datetime, date
 
 # Cria o dicionário CATEGORIES como constante para armazenar os tipos de transação
 CATEGORIES = {
@@ -8,6 +8,7 @@ CATEGORIES = {
     3: "Transferência"
 }
 
+# Classes
 class Transaction:
 
     def __init__(self, amount: float, category: int, description: str = "") -> None:
@@ -36,7 +37,7 @@ class Transaction:
         returns:
           informations(str) -> As informações da transação
         """
-        return f"Transação: {self.description} R${self.amount:.2f} {CATEGORIES[self.category]}"
+        return f"Transação: {self.description} R${round(self.amount, 2)} ({CATEGORIES[self.category]})"
 
     def update(self, 
                amount: float | None = None,
@@ -95,6 +96,7 @@ class Account:
         """
         # Instancia a transação e a armazena em self.transactions
         self.transactions.append(Transaction(amount, category, description))
+        self.balance += amount
     
     def get_transactions(self, 
                          start_date: datetime | None = None, 
@@ -121,7 +123,7 @@ class Account:
 
 class Investment:
 
-    def __init__(self, type: int, amount: float, rate_of_return: float, owner_account: Account) -> None:
+    def __init__(self, name: str, investment_type: int, amount: float, rate_of_return: float, client) -> None:
         """
         Instancia um objeto da classe Investment
 
@@ -130,23 +132,27 @@ class Investment:
           amount(float): Quantidade investida.
           rate_of_return(float): Rate de retorno
         """
-        self.type = type
+        self.name = name
+        self.investment_type = investment_type
         if amount < 0:
             raise ValueError("Amount não pode ser negativo")
         self.amount = amount
         self.rate_of_return = rate_of_return
         self.date = datetime.now()
-        self.account = owner_account
+        self.client = client
 
-    def calculate_value(self) -> float:
+    def calculate_value(self, estimate_date: date = None) -> float:
         """
         Retorna uma estimativa do retorno de um investimento linear
 
+        args:
+          estimate_date(date): A data para o cálculo do valor estimado
         returns:
           valor(float): Valor estimado.
         """
-        now = datetime.now()
-        months_elapsed = (now.year - self.date.year) * 12 + (now.month - self.date.month)
+        if estimate_date is None:
+            estimate_date = datetime.now()
+        months_elapsed = (estimate_date.year - self.date.year) * 12 + (estimate_date.month - self.date.month)
         return self.amount + self.rate_of_return * months_elapsed
     
     def sell(self, account: Account) -> None:
@@ -157,13 +163,12 @@ class Investment:
           account(Account): A conta onde será realizada a venda
         """
         investment_value = self.calculate_value()
-        if account.balance < investment_value:
-            raise ValueError("Saldo insuficiente para a compra")
         account.balance -= investment_value
-        self.account.balance += investment_value
+        self.client.accounts[0].balance += investment_value
         
 
 class Client:
+    
 
     def __init__(self, accounts: list[Account], investments: list[Investment], name: str = ""):
         """
@@ -200,13 +205,60 @@ class Client:
         """
         self.investments.append(investment)
     
-    def get_net_worth(self) -> float:
+    def get_net_worth(self, estimate_date: date = datetime.now()) -> float:
         """
         Retorna o valor estimado em dinheiro de um cliente de acordo com seus investimentos/contas.
 
+        args:
+          estimate_date(date): A data para a estimativa da net_work
         returns:
           new_worth(float): A net worth do Client.
         """
-        net_worth = sum(account.balance for account in self.accounts) + sum(investment.calculate_value() for investment in self.investments)
+        net_worth = sum(account.balance for account in self.accounts) + sum(investment.calculate_value(estimate_date) for investment in self.investments)
         return net_worth
+
+
+# Functions
+
+def generate_report(client: Client) -> dict:
+    """
+    Gera um dicionário com um relatório do cliente atualmente
     
+    returns:
+      relatorio(dict): O relatório em dicionário que contém como chaves
+      os nomes das contas (Accounts), os nomes dos investimentos 
+      (Investments), o dinheiro armazenado nas contas (accounts_current_money),
+      o dinheiro estimado nos investimentos (investments_current_money),
+      e uma estimativa do dinheiro total do cliente (client_estimate_money).
+    """
+    current_time = datetime.now()
+    relatorio = dict()
+    relatorio["Accounts"] = [account.name for account in client.accounts]
+    relatorio["Investments"] = [investment.name for investment in client.investments]
+    accounts_current_money = sum([account.balance for account in client.accounts])
+    investments_current_money = sum([investment.calculate_value(current_time) for investment in client.investments])
+    relatorio["accounts_current_money"] = accounts_current_money
+    relatorio["investments_current_money"] = investments_current_money
+    relatorio["client_estimate_money"] = client.get_net_worth(current_time)
+    return relatorio
+
+def future_value_report(client: Client, time: date) -> dict:
+    """
+    Gera um dicionário com um relatório de estimativa do cliente de acordo com uma data.
+    
+    returns:
+      relatorio(dict): O relatório em dicionário que contém como chaves
+      os nomes das contas (Accounts), os nomes dos investimentos 
+      (Investments), o dinheiro armazenado nas contas (accounts_current_money),
+      o dinheiro estimado nos investimentos (investments_current_money),
+      e uma estimativa do dinheiro total do cliente (client_estimate_money).
+    """
+    relatorio = dict()
+    relatorio["Accounts"] = [account.name for account in client.accounts]
+    relatorio["Investments"] = [investment.name for investment in client.investments]
+    accounts_current_money = sum([account.balance for account in client.accounts])
+    investments_current_money = sum([investment.calculate_value(time) for investment in client.investments])
+    relatorio["accounts_current_money"] = accounts_current_money
+    relatorio["investments_current_money"] = investments_current_money
+    relatorio["client_estimate_money"] = client.get_net_worth(time)
+    return relatorio

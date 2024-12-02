@@ -369,7 +369,7 @@ Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](
 
 ### Almir Sérgio Ramos dos Santos Filho
 
-![almir](imagens/foto__almir.png)
+![almir](imagens/foto_almir.png)
 
 ##### contato: almirsergio.a@gmail.com
 

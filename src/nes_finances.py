@@ -29,7 +29,7 @@ class Transaction:
             raise ValueError("Categoria inválida")
         self.category = category
         self.description = description
-    
+
     def __str__(self) -> str:
         """
         Retorna as informações da transação
@@ -39,7 +39,7 @@ class Transaction:
         """
         return f"Transação: {self.description} R${round(self.amount, 2)} ({CATEGORIES[self.category]})"
 
-    def update(self, 
+    def update(self,
                amount: float | None = None,
                category: int | None = None,
                description: str | None = None,
@@ -84,7 +84,7 @@ class Account:
             raise ValueError("Amount não pode ser negativo")
         self.balance = balance
         self.transactions = transactions
-    
+
     def add_transaction(self, amount: float, category: int, description: str = "") -> None:
         """
         Instancia um objeto da classe Transaction e adiciona ele na lista de transações da conta
@@ -97,10 +97,10 @@ class Account:
         # Instancia a transação e a armazena em self.transactions
         self.transactions.append(Transaction(amount, category, description))
         self.balance += amount
-    
-    def get_transactions(self, 
-                         start_date: datetime | None = None, 
-                         end_date: datetime | None = None, 
+
+    def get_transactions(self,
+                         start_date: datetime | None = None,
+                         end_date: datetime | None = None,
                          category: int | None = None) -> list[Transaction]:
         """
         Gera uma lista nova de acordo com o atributo transitions.
@@ -111,7 +111,7 @@ class Account:
           category(int | None): Apenas transações com categorias iguais a essa podem ser retornadas.
 
         returns:
-          lista_nova(list[Transaction]): O atributo transactions depois das filtragens. 
+          lista_nova(list[Transaction]): O atributo transactions depois das filtragens.
         """
         return [
           transaction for transaction in self.transactions
@@ -154,7 +154,7 @@ class Investment:
             estimate_date = datetime.now()
         months_elapsed = (estimate_date.year - self.date.year) * 12 + (estimate_date.month - self.date.month)
         return self.amount + self.rate_of_return * months_elapsed
-    
+
     def sell(self, account: Account) -> None:
         """
         Vende um investimento para uma conta.
@@ -165,10 +165,10 @@ class Investment:
         investment_value = self.calculate_value()
         account.balance -= investment_value
         self.client.accounts[0].balance += investment_value
-        
+
 
 class Client:
-    
+
 
     def __init__(self, accounts: list[Account], investments: list[Investment], name: str = ""):
         """
@@ -195,7 +195,7 @@ class Client:
         new_acc = Account(acc_name, 0, [])
         self.accounts.append(new_acc)
         return new_acc
-    
+
     def add_investment(self, investment: Investment) -> None:
         """
         Associa um investimento à um cliente
@@ -204,7 +204,7 @@ class Client:
           investment(Investment): O investimento que será associado.
         """
         self.investments.append(investment)
-    
+
     def get_net_worth(self, estimate_date: date = datetime.now()) -> float:
         """
         Retorna o valor estimado em dinheiro de um cliente de acordo com seus investimentos/contas.
@@ -223,7 +223,7 @@ class Client:
 def generate_report(client: Client) -> dict:
     """
     Gera um dicionário com um relatório do cliente atualmente
-    
+
     returns:
       relatorio(dict): O relatório em dicionário que contém como chaves
       os nomes das contas (Accounts), os nomes dos investimentos 
@@ -245,10 +245,10 @@ def generate_report(client: Client) -> dict:
 def future_value_report(client: Client, time: date) -> dict:
     """
     Gera um dicionário com um relatório de estimativa do cliente de acordo com uma data.
-    
+
     returns:
       relatorio(dict): O relatório em dicionário que contém como chaves
-      os nomes das contas (Accounts), os nomes dos investimentos 
+      os nomes das contas (Accounts), os nomes dos investimentos
       (Investments), o dinheiro armazenado nas contas (accounts_current_money),
       o dinheiro estimado nos investimentos (investments_current_money),
       e uma estimativa do dinheiro total do cliente (client_estimate_money).

@@ -282,7 +282,7 @@ print(f"Valor estimado do investimento após 6 meses: R${valor_estimado:.2f}")
 
 Saída esperada:
 ```
-Valor estimado do investimento após 6 meses: R$13000.00
+Valor estimado do investimento após 6 meses: R$ 9700.00
 
 ```
 
@@ -306,9 +306,9 @@ Saída esperada:
 Relatório de Saldo Atual:
 Contas: ['Conta Corrente', 'Conta Poupança']
 Investimentos: ['Fundo de Ações']
-Dinheiro nas contas: R$1800.00
-Dinheiro estimado nos investimentos: R$13000.00
-Dinheiro total estimado do cliente: R$14800.00
+Dinheiro nas contas: R$2200.00
+Dinheiro estimado nos investimentos: R$10000.00
+Dinheiro total estimado do cliente: R$12200.00
 ```
 
 ### 4. Gerando Relatório de Valor Futuro de Contas e Investimentos
@@ -333,9 +333,9 @@ Saída esperada:
 Relatório de Valor Futuro:
 Contas: ['Conta Corrente', 'Conta Poupança']
 Investimentos: ['Fundo de Ações']
-Dinheiro nas contas após 12 meses: R$1800.00
-Dinheiro estimado nos investimentos após 12 meses: R$18000.00
-Dinheiro total estimado do cliente após 12 meses: R$19800.00
+Dinheiro nas contas após 12 meses: R$2200.00
+Dinheiro estimado nos investimentos após 12 meses: R$10300.00
+Dinheiro total estimado do cliente após 12 meses: R$12500.00
 ```
 ### 5. Realizando a Venda de um Investimento
 ```# Supondo que o cliente tenha uma conta corrente com saldo suficiente para vender o investimento

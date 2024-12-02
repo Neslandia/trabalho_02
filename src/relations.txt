@@ -1,0 +1,66 @@
+# Relações entre as Classes e Funções
+
+1. Transaction:
+   - A classe `Transaction` representa uma transação financeira. Cada transação possui:
+     - Um valor (amount) e uma categoria (category).
+     - Uma descrição opcional (description).
+     - A data da transação é registrada automaticamente no momento de sua criação.
+
+   Relacionamento com outras classes:
+   - Account: A classe `Transaction` está relacionada com a classe `Account` através das transações que uma conta pode realizar. A classe `Account` contém uma lista de instâncias da classe `Transaction`.
+
+2. Account:
+   - A classe `Account` representa uma conta bancária. Ela possui:
+     - Um nome (`name`), um saldo (`balance`) e uma lista de transações (`transactions`).
+     - Métodos para adicionar transações e obter transações com filtros específicos (por data e categoria).
+
+   Relacionamento com outras classes:
+   - Transaction: A classe `Account` pode ter muitas instâncias de `Transaction` associadas a ela, representando as transações realizadas na conta.
+   - Client: A classe `Account` está associada a um `Client` através da lista de contas de cada cliente. Um cliente pode ter várias contas.
+
+3. Investment:
+   - A classe `Investment` representa um investimento financeiro. Cada investimento possui:
+     - Um nome (`name`), um tipo (`investment_type`), um valor inicial (`amount`), uma taxa de retorno (`rate_of_return`), e a data de criação.
+     - Um método para calcular o valor futuro do investimento com base na taxa de retorno.
+
+   Relacionamento com outras classes:
+   - Client: A classe `Investment` está associada ao `Client`, pois o investimento pertence a um cliente.
+   - Account: Embora a classe `Investment` não se relacione diretamente com `Account`, é possível vender um investimento para um `Account` ao transferir o valor do investimento para o saldo da conta.
+
+4. Client:
+   - A classe `Client` representa um cliente com várias contas e investimentos. Cada cliente possui:
+     - Uma lista de contas bancárias (`accounts`), uma lista de investimentos (`investments`), e um nome (`name`).
+     - Métodos para adicionar contas e investimentos, e calcular o patrimônio líquido do cliente com base nas contas e investimentos.
+
+   Relacionamento com outras classes:
+   - Account: A classe `Client` possui uma lista de contas associadas a ele.
+   - Investment: A classe `Client` também possui uma lista de investimentos associados.
+   - Transaction: Indiretamente relacionada através das `Account` do cliente. As transações realizadas em suas contas podem afetar o saldo e o patrimônio líquido.
+
+5. Funções `generate_report` e `future_value_report`:
+   - generate_report:
+     - Essa função recebe um objeto `Client` e gera um relatório atual, com informações sobre as contas e investimentos do cliente, o dinheiro nas contas, e a estimativa de valor dos investimentos.
+     - Retorna um dicionário contendo o nome das contas, investimentos, dinheiro nas contas, dinheiro estimado nos investimentos e a estimativa de patrimônio total do cliente.
+
+   - future_value_report:
+     - Similar à função `generate_report`, mas essa função calcula e retorna um relatório projetado para uma data futura especificada pelo parâmetro `time`.
+     - Utiliza o valor projetado dos investimentos com base na data fornecida, calculando o patrimônio do cliente em um futuro estimado.
+
+# Relações entre as Classes: Herança, Agregação e Associação
+
+1. Herança:
+   - Não há herança entre as classes do sistema.
+
+2. Agregação:
+   - Client → Account: A classe `Client` possui uma lista de `Account`s. Isso representa uma relação de agregação, onde o cliente **tem** contas, mas uma conta pode existir independentemente do cliente.
+   - Client → Investment: A classe `Client` possui uma lista de `Investment`s. Isso representa uma relação de agregação, onde o cliente **tem** investimentos, mas um investimento pode existir independentemente do cliente.
+   - Account → Transaction: A classe `Account` possui uma lista de `Transaction`s. Isso representa uma relação de agregação, onde a conta **tem** transações, mas uma transação pode existir independentemente da conta.
+
+3. Composição:
+   - Não há composição direta entre as classes.
+
+4. Associação:
+   - Investment → Account: A classe `Investment` tem uma associação com a classe `Account` no método `sell`, onde o valor do investimento é transferido para a conta.
+   - Transaction → Account: A classe `Transaction` tem uma associação com a classe `Account` através das transações realizadas na conta.
+
+

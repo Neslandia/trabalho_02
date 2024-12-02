@@ -1,16 +1,14 @@
-# Sistema de Gestão de Finanças Pessoais
+# 🚀 Sistema de Gestão de Finanças Pessoais
 
 Este projeto implementa um sistema de gestão de finanças pessoais, permitindo o controle de contas bancárias e investimentos, incluindo a adição de transações e o cálculo de valores futuros de investimentos.
 
-## Funcionalidades
+## 🔍 Funcionalidades
 
 - **Contas Bancárias**: O usuário pode adicionar diferentes tipos de contas (corrente, poupança, etc.) e realizar transações como depósitos e retiradas.
 - **Investimentos**: Permite o registro de investimentos e a estimativa do valor futuro baseado em taxas de retorno.
 - **Relatórios**: Geração de relatórios com o saldo atual das contas e o valor estimado de investimentos.
 
-## Estrutura do Projeto
-
-## Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 A estrutura do diretório do projeto é a seguinte:
 ```
@@ -29,7 +27,7 @@ trabalho_02/
 └── README.md
 ```
 
-### Descrição dos Arquivos
+### 📝 Descrição dos Arquivos
 
 - **`generate_report.py`**: Contém a função `generate_report(client)` para gerar um relatório financeiro com o saldo atual das contas e investimentos do cliente.
 - **`future_value_report.py`**: Contém a função `future_value_report(client, time)` para gerar um relatório de valor estimado futuro, considerando uma data específica.
@@ -38,7 +36,7 @@ trabalho_02/
 - **`relations.txt`**: Descrição das relações entre as classes e tipos de relacionamento como herança, agregação, etc.
 - **`requirements.txt`**: Arquivo de dependências para o projeto (ainda vazio).
 
-## Como Rodar
+## 💻 Como Rodar
 
 ### Requisitos
 
@@ -60,7 +58,7 @@ Para rodar este projeto, você precisará de Python 3.x e das dependências list
    python exemplos.py
    ```
 
-## Funções e Métodos
+## 🧩 Funções e Métodos
 
 ### **Funções no módulo `generate_report.py`**
 
@@ -81,7 +79,7 @@ Para rodar este projeto, você precisará de Python 3.x e das dependências list
   print(relatorio)
   ```
 
-### **Funções no módulo `future_value_report.py`**
+### 🧩 **Funções no módulo `future_value_report.py`**
 
 - **`future_value_report(client, time)`**:
 
@@ -96,7 +94,7 @@ Para rodar este projeto, você precisará de Python 3.x e das dependências list
   print(relatorio_futuro)
   ```
 
-### **Classes no módulo `nes_finances.py`**
+### 🧩 **Classes no módulo `nes_finances.py`**
 
 ```Client```: Representa um cliente com várias contas e investimentos. Permite adicionar contas e realizar transações.
 
@@ -221,7 +219,7 @@ Um dicionário que mapeia inteiros para categorias de transação:
 - `2`: Depósito
 - `3`: Transferência
 
-## Exemplo de Uso
+## 📌 Exemplo de Uso
 
 ### 1. Criando um Cliente, Contas e Realizando Transações
 ```
@@ -351,7 +349,7 @@ Saída esperada:
 Saldo da Conta Corrente após venda do investimento: R$700.00
 ```
 
-## Contribuição
+## ✍️ Contribuição
 
 Se você deseja contribuir para o projeto, siga as etapas abaixo:
 
@@ -361,11 +359,11 @@ Se você deseja contribuir para o projeto, siga as etapas abaixo:
 4. Envie para o repositório (`git push origin feature/nova-feature`).
 5. Abra um Pull Request.
 
-## Licença
+## 📜 Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## Desenvolvedores:
+## 👥 Desenvolvedores:
 
 ### Almir Sérgio Ramos dos Santos Filho
 

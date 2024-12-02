@@ -365,6 +365,16 @@ Se você deseja contribuir para o projeto, siga as etapas abaixo:
 
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
----
+## Desenvolvedores:
 
-Agora o `README.md` está completo com todas as funções e exemplos de uso!
+### Almir Sérgio Ramos dos Santos Filho
+
+![almir](imagens/foto__almir.png)
+
+##### contato: almirsergio.a@gmail.com
+
+### João Marcus Vieira de Sena Reis
+
+![joão](imagens/foto_JM.png)
+
+##### contato: joaosenareis@gmail.com

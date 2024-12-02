@@ -1,6 +1,8 @@
 from .nes_finances import Client
 from datetime import datetime, date
 
+# Função
+
 def future_value_report(client: Client, time: date) -> dict:
     """
     Gera um dicionário com um relatório de estimativa do cliente de acordo com uma data.

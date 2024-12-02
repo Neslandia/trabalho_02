@@ -1,6 +1,8 @@
 from .nes_finances import Client
 from datetime import datetime, date
 
+# Função
+
 def generate_report(client: Client) -> dict:
     """
     Gera um dicionário com um relatório do cliente atualmente

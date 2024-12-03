@@ -1,10 +1,10 @@
-from src import CATEGORIES
-from src import Transaction
-from src import Account
-from src import Investment
-from src import Client
-from src import generate_report
-from src import future_value_report
+from finances import CATEGORIES
+from finances import Transaction
+from finances import Account
+from finances import Investment
+from finances import Client
+from finances import generate_report
+from finances import future_value_report
 from datetime import datetime
 
 # Criando o cliente

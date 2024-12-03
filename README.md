@@ -30,9 +30,9 @@ trabalho_02/
 │   ├── test_investiments.py
 │   ├── test_transactions.py
 ├── .gitignore
-├── exemplos.py
 ├── LICENSE
 ├── README.md
+├── exemplos.py
 ├── relations.txt
 ├── requirements.txt
 └── setup.py

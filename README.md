@@ -27,6 +27,13 @@ trabalho_02/
 └── README.md
 ```
 
+## Instalação
+
+No terminal do diretório em que você deseja instalar, digite o código:
+```
+git clone https://github.com/Neslandia/trabalho_02.git
+```
+
 ### 📝 Descrição dos Arquivos
 
 - **`generate_report.py`**: Contém a função `generate_report(client)` para gerar um relatório financeiro com o saldo atual das contas e investimentos do cliente.

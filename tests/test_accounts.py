@@ -24,6 +24,8 @@ def test_account_get_transactions():
     transactions = acc.get_transactions(category=2)
     assert len(transactions) == 1
     assert transactions[0].category == 2
+    assert transactions[0].amount == 200.0
+    assert transactions[1].description == "Groceries"
 
 def test_account_negative_balance():
     acc = Account(name="Savings", balance=0, transactions=[])

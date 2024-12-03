@@ -13,7 +13,7 @@ Este projeto implementa um sistema de gestão de finanças pessoais, permitindo 
 A estrutura do diretório do projeto é a seguinte:
 ```
 trabalho_02/
-├── src/
+├── finances/
 │   ├── __pycache__/
 │   ├── __init__.py
 │   ├── future_value_report.py
@@ -21,10 +21,21 @@ trabalho_02/
 │   ├── nes_finances.py
 │   ├── relations.txt
 │   ├── requirements.txt
+├── imagens/
+│   ├── foto_almir.png
+│   ├── foto_JM.png
+├── tests/
+│   ├── test_accounts.py
+│   ├── test_client.py
+│   ├── test_investiments.py
+│   ├── test_transactions.py
 ├── .gitignore
 ├── exemplos.py
 ├── LICENSE
-└── README.md
+├── README.md
+├── relations.txt
+├── requirements.txt
+└── setup.py
 ```
 
 ## Instalação

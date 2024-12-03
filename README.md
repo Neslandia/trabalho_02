@@ -19,8 +19,6 @@ trabalho_02/
 │   ├── future_value_report.py
 │   ├── generate_report.py
 │   ├── nes_finances.py
-│   ├── relations.txt
-│   ├── requirements.txt
 ├── imagens/
 │   ├── foto_almir.png
 │   ├── foto_JM.png
